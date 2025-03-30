@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playbook - Sesión 1: Taller Innovación 3D</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+            max-width: 900px;
+            margin: auto;
+        }
+        .header {
+            background-color: #2196F3; /* Blue accent color */
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+        .time-title {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 1.1em;
+            color: #333;
+        }
+        .banner {
+            background-color: #2196F3; /* Blue accent color */
+            color: white;
+            padding: 12px 15px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .banner:hover {
+            background-color: #1976D2; /* Darker blue on hover */
+        }
+        .banner .title {
+            font-size: 1.3em;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .banner .subtitle {
+            font-size: 1em;
+            margin-top: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            padding-top: 8px;
+            font-weight: normal;
+        }
+        .content {
+            display: none;
+            padding: 15px;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            border-radius: 0 0 5px 5px;
+            background-color: #f9f9f9;
+        }
+        .step-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        .dialogue {
+            background-color: #e3f2fd; /* Light blue background for dialogue */
+            border: 1px solid #bbdefb; /* Lighter blue border */
+            border-radius: 8px;
+            padding: 12px;
+            margin: 10px 0;
+            text-align: left; /* Adjusted alignment */
+            font-style: normal; /* Removed italics for main dialogue */
+            position: relative;
+        }
+        .dialogue::before { /* Optional: Add a small quote icon or similar */
+            /* content: '💬'; */
+            /* position: absolute; */
+            /* left: 10px; */
+            /* top: 10px; */
+            /* font-size: 1.2em; */
+        }
+        .dialogue i { /* Style for instructions within dialogue */
+           display: block;
+           margin-top: 8px;
+           color: #555;
+           font-style: italic;
+        }
+        .dropdown {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .dropdown select {
+            font-size: 1em;
+            padding: 8px 12px;
+            margin-left: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+            text-align: left;
+        }
+         td:first-child {
+            font-weight: bold;
+             width: 40%; /* Adjust width as needed */
+         }
+        ul, ol {
+            margin-left: 20px;
+            padding-left: 15px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        strong {
+             color: #1976D2; /* Darker blue for emphasis */
+        }
+        code {
+            background-color: #eee;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+    <script>
+        function updateActivities() {
+            var selectedTime = document.getElementById('time-select').value;
+            var activities = document.getElementsByClassName('activity');
+
+            document.getElementById('selected-time').innerText = "Tiempo efectivo de clase: " + selectedTime + " minutos";
+
+            // Since the base time for this session IS 40 minutes, we show all activities for 40min.
+            // If there were shorter hypothetical options (e.g., 35), logic would go here.
+            for (var i = 0; i < activities.length; i++) {
+                activities[i].style.display = 'block';
+            }
+
+            // Example of hiding logic if needed for shorter times (adjust IDs accordingly)
+            /*
+            if (selectedTime === '35') { // Hypothetical
+                document.getElementById('activity-3').style.display = 'none'; // Example: Hide Innovator Code
+                document.getElementById('activity-4').style.display = 'none'; // Example: Hide Framing
+            } else if (selectedTime === '30') { // Hypothetical
+                document.getElementById('activity-3').style.display = 'none';
+                document.getElementById('activity-4').style.display = 'none';
+                document.getElementById('activity-6').style.display = 'none'; // Example: Hide Inspiration Shots
+            }
+            */
+        }
+
+        function toggleContent(id) {
+            var content = document.getElementById(id);
+            if (content.style.display === "none" || content.style.display === "") {
+                content.style.display = "block";
+            } else {
+                content.style.display = "none";
+            }
+        }
+
+        // Ensure activities are shown correctly on initial load based on default dropdown value
+        document.addEventListener('DOMContentLoaded', function() {
+            updateActivities(); // Call once on load
+             // Set default display to none for all content sections
+             var contents = document.querySelectorAll('.content');
+             contents.forEach(function(content) {
+                 content.style.display = 'none';
+             });
+        });
+    </script>
+</head>
+<body>
+
+<div class="header">
+    <h1>Playbook - Taller: Del Diseño 3D a la Realidad: ¡Imprimiendo el Futuro! (1º Secundaria)</h1>
+    <h2>Sesión 1: Despegue Creativo en 3D - Preparando la Impresión</h2>
+</div>
+
+<div class="container">
+    <div class="dropdown">
+        <label for="time-select">Tiempo efectivo de Clase:</label>
+        <select id="time-select" onchange="updateActivities()">
+            <option value="40" selected>40 minutos</option>
+            <!-- Add other options if variations are needed -->
+            <!-- <option value="35">35 minutos</option> -->
+            <!-- <option value="30">30 minutos</option> -->
+        </select>
+    </div>
+
+    <h2 id="selected-time" class="time-title">Tiempo efectivo de clase: 40 minutos</h2>
+
+<!-- ------------------------------------------------- Espacio para De un Vistazo --------------------------------------------------------- -->
+<div id="activity-0" class="activity">
+    <div class="banner" onclick="toggleContent('de_un_vistazo')">
+        <div class="title">🎯 De un Vistazo y Preparación Previa 📋</div>
+        <div class="subtitle">Resumen rápido de la sesión y lo que necesitas preparar.</div>
+    </div>
+    <div id="de_un_vistazo" class="content">
+        <table>
+            <tr>
+                <td>
+                    <strong>Objetivos:</strong>
+                    <ul>
+                        <li>Presentar el taller, la receta 'De la idea al prototipo' adaptada y el objetivo (diseñar un prototipo 3D imprimible para un ODS).</li>
+                        <li>Formar equipos de diseño 3D.</li>
+                        <li>Establecer el "Código del Innovador 3D".</li>
+                        <li>Conectar el taller con las habilidades de diseño e impresión 3D (Tinkercad).</li>
+                        <li>Presentar los ODS como desafíos de diseño.</li>
+                        <li>Mostrar "Shots de Inspiración" de impresión 3D con impacto ODS.</li>
+                        <li>Táctica Combinaboard (Parte 1): Iniciar la creación de un tablero visual de inspiración por equipo.</li>
+                    </ul>
+                    <strong>Tácticas Principales:</strong> Combinaboard (Creación Inicial).<br><br>
+                    <strong>Entregable Clave:</strong> Equipos formados, Combinaboard inicial por equipo con imágenes, palabras clave y preguntas sobre su ODS/problema elegido.
+                </td>
+                <td>
+                    <strong>Materiales Específicos:</strong>
+                    <ul>
+                        <li>Proyector o pantalla interactiva.</li>
+                        <li>Presentación de diapositivas (Diapositivas 1-8 detalladas abajo).</li>
+                        <li>Acceso a tablero Miro (o similar) preparado con secciones para cada equipo y espacio para Combinaboard.</li>
+                        <li>Acceso a internet para buscar imágenes/inspiración.</li>
+                        <li>Iconos/Imágenes de los ODS.</li>
+                        <li>Ejemplos "Shots de Inspiración" (Diapositiva 6).</li>
+                    </ul>
+                     <strong>Preparación Previa para ESTA Sesión:</strong>
+                    <ol>
+                        <li><strong>Presentación Lista:</strong> Tener listas las Diapositivas 1 a 8. Preparar las imágenes/gifs de los "Shots de Inspiración" (prótesis, arrecifes, kit robótica, casas 3D).</li>
+                        <li><strong>Tablero Digital:</strong> Preparar el tablero Miro con secciones para cada equipo, nombradas.</li>
+                        <li><strong>Código Innovador:</strong> Tener lista la versión para Secundaria (diseño "COOL").</li>
+                        <li><strong>Conexión Tinkercad:</strong> Pensar en funciones específicas de Tinkercad que usarán (mencionar brevemente en Framing).</li>
+                        <li><strong>ODS:</strong> Tener lista la diapositiva con los iconos ODS (Diapositiva 5).</li>
+                    </ol>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- ------------------------------------------------- Espacio para Actividades --------------------------------------------------------- -->
+
+<!-- Actividad 1 -->
+<div id="activity-1" class="activity">
+    <div class="banner" onclick="toggleContent('bienvenida_intro')">
+        <div class="title">🚀 Actividad 1: Bienvenida e Introducción a la Receta ⏰ Tiempo: 5 minutos</div>
+        <div class="subtitle">Introducir el taller, la "Receta" de innovación y motivar a los estudiantes.</div>
+    </div>
+    <div id="bienvenida_intro" class="content">
+        <table>
+            <tr>
+                <td><strong>PASO 1 (1.5 minutos):</strong> Proyectar Diapositiva 1.</td>
+                <td class="dialogue">
+                    "¡Qué onda, diseñadores 3D del futuro! ¡Bienvenidos al taller 'Del Diseño 3D a la Realidad'! Prepárense para un viaje donde vamos a convertir ideas geniales en diseños 3D que ¡podremos imprimir y tocar! 🚀✨ Hoy vamos a aprender cómo pasar de una chispa de idea a un objeto real usando la magia de Tinkercad y la impresión 3D."
+                </td>
+            </tr>
+             <tr>
+                <td><strong>PASO 2 (1.5 minutos):</strong> Proyectar Diapositiva 2 (Título).</td>
+                <td class="dialogue">
+                     "En este taller, vamos a usar una 'receta' secreta, como chefs de la innovación, llamada <strong>'De la idea al prototipo'</strong>. Esta receta tiene pasos súper cool, como ingredientes, que mezclaremos para crear algo increíble. ¡Miren!"
+                </td>
+            </tr>
+            <tr>
+                <td><strong>PASO 3 (2 minutos):</strong> Proyectar Diapositiva 2 (Lista de Tácticas).</td>
+                <td class="dialogue">
+                    "Nuestra receta tiene 6 tácticas clave que nos guiarán:"
+                    <ul>
+                        <li><strong>Combinaboard:</strong> ¡Crearemos nuestro universo de inspiración 3D con imágenes, palabras y preguntas clave! (Icono 🖼️+📝+❓)</li>
+                        <li><strong>Fence the Playground:</strong> ¡Definiremos las Reglas de Oro de nuestro diseño para enfocar nuestros súper poderes! (Icono 🚧+🎯)</li>
+                        <li><strong>6-3-5 (Ideas 3D):</strong> ¡Desataremos una explosión de 18+ ideas en minutos con nuestro equipo! (Icono 💡x18+)</li>
+                        <li><strong>Human Truths & T-Bar:</strong> ¡Conectaremos nuestra MEJOR idea con el corazón humano ❤️ y crearemos su perfil completo! (Icono ❤️+📊)</li>
+                        <li><strong>Big Beats (Impacto 3D):</strong> ¡Contaremos la historia ÉPICA de cómo nuestro diseño cambiará el mundo! (Icono 🌍+💥)</li>
+                        <li><strong>Prototipo Conceptual & ¡Lanzamiento!:</strong> ¡Planearemos cómo mostrar nuestra idea en Tinkercad y presentarla al mundo! (Icono ✨+🚀)</li>
+                    </ul>
+                     "¡Estos pasos nos ayudarán a refinar nuestros diseños y prepararlos para hacerlos realidad! ¡Preparen sus mentes creativas!"
+                      <i>(Leer cada táctica con entusiasmo, explicando brevemente el icono si es necesario).</i>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- Actividad 2 -->
+<div id="activity-2" class="activity">
+    <div class="banner" onclick="toggleContent('formacion_equipos')">
+        <div class="title">🤝 Actividad 2: Formación de Equipos ⏰ Tiempo: 5 minutos</div>
+        <div class="subtitle">Organizar a los estudiantes en equipos de diseño colaborativo.</div>
+    </div>
+    <div id="formacion_equipos" class="content">
+        <table>
+            <tr>
+                <td><strong>PASO 1 (1 minuto):</strong> Dar instrucciones claras para formar equipos.</td>
+                <td class="dialogue">
+                    "¡Ok, diseñadores, a unir talentos! Necesitamos formar nuestros 'Estudios de Diseño 3D'. Formen equipos de 3 o 4 personas. Busquen a sus 'compas' de modelado con quienes quieran colaborar en esta misión."
+                    <i>(Indicar el método para formar equipos: por afinidad, al azar, preasignados, etc. según la dinámica del grupo. Por ejemplo: "Encuentren a 2 o 3 personas cerca de ustedes con quienes no hayan trabajado recientemente.")</i>
+                </td>
+            </tr>
+             <tr>
+                <td><strong>PASO 2 (3 minutos):</strong> Tiempo para formar equipos y elegir un nombre.</td>
+                <td class="dialogue">
+                    "Tienen 3 minutos para formar su equipo. Una vez juntos, piensen en un nombre creativo para su 'Estudio 3D'. ¡Algo que refleje su espíritu innovador!"
+                     <i>(Circular por el aula, ayudar a formar equipos si es necesario, asegurarse de que todos tengan un equipo.)</i>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>PASO 3 (1 minuto):</strong> Presentación rápida de los equipos.</td>
+                <td class="dialogue">
+                    "¡Excelente! Ahora, cada 'Estudio 3D' presente rápidamente su nombre al resto de la clase. ¡Queremos conocerlos!"
+                    <i>(Pedir a cada equipo que diga su nombre en voz alta).</i>
+                    "¡Genial! Recuerden, ¡la colaboración es clave en diseño 3D! ¡Estos son sus 'Estudios 3D' listos para innovar!"
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- Actividad 3 -->
+<div id="activity-3" class="activity">
+    <div class="banner" onclick="toggleContent('codigo_innovador')">
+        <div class="title">📜 Actividad 3: Código del Innovador 3D ⏰ Tiempo: 5 minutos</div>
+        <div class="subtitle">Establecer las reglas de oro para la colaboración y la creatividad en el taller.</div>
+    </div>
+    <div id="codigo_innovador" class="content">
+        <table>
+            <tr>
+                <td><strong>PASO 1 (1 minuto):</strong> Introducir el Código. Proyectar Diapositiva 3.</td>
+                <td class="dialogue">
+                     "Antes de sumergirnos en el modelado y la creatividad, vamos a establecer nuestro <strong>'Código del Innovador 3D'</strong>. Estas son nuestras reglas de oro para asegurarnos de que la creatividad fluya libremente y trabajemos juntos como verdaderos profesionales de la innovación."
+                </td>
+            </tr>
+            <tr>
+                <td><strong>PASO 2 (3 minutos):</strong> Leer y explicar los puntos clave del Código.</td>
+                 <td class="dialogue">
+                    "Nuestro código nos guiará en este viaje:"
+                    <ul>
+                        <li><strong>Escuchar Activamente:</strong> Presten atención real a las ideas de los demás. ¡Las mejores ideas surgen juntas!</li>
+                        <li><strong>Respetar Todas las Ideas:</strong> No hay ideas 'malas' en la fase creativa. Toda propuesta es valiosa.</li>
+                        <li><strong>Construir sobre Ideas ("Sí, y además..."):</strong> En lugar de decir "no" o "pero", digan "Sí, y además podríamos...". ¡Sumen, no resten!</li>
+                        <li><strong>Compartir el Tiempo:</strong> Asegúrense de que todos en el equipo tengan la oportunidad de hablar y contribuir.</li>
+                        <li><strong>Ser Creativos y Visuales:</strong> ¡Piensen fuera de la caja! Dibujen, usen imágenes, ¡expresen sus ideas de forma visual!</li>
+                        <li><strong>Divertirse:</strong> ¡La innovación es emocionante! Disfruten del proceso de crear algo nuevo.</li>
+                        <li><strong>Colaborar al Máximo:</strong> Trabajen juntos, apóyense, ¡el éxito del equipo es el éxito de todos!</li>
+                    </ul>
+                     <i>(Leer cada punto claramente. Se puede pedir a diferentes estudiantes que lean un punto. Explicar brevemente la importancia de cada regla con ejemplos si es necesario, manteniendo un tono directo y motivador como indica la Opción 2 del PDF).</i>
+                 </td>
+            </tr>
+             <tr>
+                <td><strong>PASO 3 (1 minuto):</strong> Reforzar el compromiso con el Código.</td>
+                <td class="dialogue">
+                    "¿Estamos todos de acuerdo en seguir este código? ¡Levanten la mano si se comprometen a ser Innovadores 3D respetuosos y colaborativos! ¡Perfecto! ¡Este código nos guía!"
+                 </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- Actividad 4 -->
+<div id="activity-4" class="activity">
+    <div class="banner" onclick="toggleContent('framing_taller')">
+        <div class="title">🌍 Actividad 4: Framing del Taller: Diseño 3D para un Mundo Mejor ⏰ Tiempo: 5 minutos</div>
+        <div class="subtitle">Conectar las habilidades de diseño 3D con la resolución de problemas reales y el impacto positivo.</div>
+    </div>
+    <div id="framing_taller" class="content">
+        <table>
+            <tr>
+                 <td><strong>PASO 1 (2 minutos):</strong> Conectar con Tinkercad y el propósito. Proyectar Diapositiva 4.</td>
+                <td class="dialogue">
+                     "¡Ustedes ya son cracks del diseño 3D! Dominan <strong>Tinkercad</strong>, saben modelar ideas geniales y ¡están listos para imprimir y hacerlas realidad! Hemos jugado, explorado y aprendido las herramientas básicas."
+                     <br><br>
+                     "Pero, ¿qué tal si usamos ese súper poder para algo más grande? En este taller, vamos a enfocar nuestra creatividad y habilidades con Tinkercad y la impresión 3D para <strong>crear soluciones innovadoras con impacto positivo</strong>."
+                </td>
+            </tr>
+            <tr>
+                <td><strong>PASO 2 (2 minutos):</strong> Definir "Innovar con Propósito".</td>
+                <td class="dialogue">
+                    "¿Innovar en qué? ¡En cómo usar el diseño y la impresión 3D para <strong>resolver problemas reales y mejorar el mundo</strong>! No se trata solo de crear objetos 'cool' o divertidos (aunque también pueden serlo), sino de diseñar <strong>soluciones 3D con impacto positivo</strong>. Vamos a diseñar con un propósito claro."
+                    <i>(Mostrar en la Diapositiva 4 la pregunta: "¿Cómo usamos Tinkercad y la impresión 3D para crear un impacto positivo?").</i>
+                </td>
+            </tr>
+             <tr>
+                <td><strong>PASO 3 (1 minuto):</strong> Preparar para la inspiración.</td>
+                 <td class="dialogue">
+                    "Piensen en los desafíos que ven a su alrededor, en la escuela, en su comunidad, o incluso problemas globales. El diseño 3D puede ser una herramienta poderosa para marcar la diferencia. ¡Prepárense para la inspiración y para empezar a diseñar soluciones que importan!"
+                 </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- Actividad 5 -->
+<div id="activity-5" class="activity">
+    <div class="banner" onclick="toggleContent('intro_ods')">
+        <div class="title">🎯 Actividad 5: Introducción a los ODS y Elección ⏰ Tiempo: 5 minutos</div>
+        <div class="subtitle">Presentar los Objetivos de Desarrollo Sostenible (ODS) como desafíos de diseño y que los equipos elijan uno.</div>
+    </div>
+    <div id="intro_ods" class="content">
+        <table>
+            <tr>
+                <td><strong>PASO 1 (1 minuto):</strong> Presentar los ODS. Proyectar Diapositiva 5 (con iconos ODS).</td>
+                <td class="dialogue">
+                    "Para guiarnos en nuestra misión de 'diseñar con propósito', vamos a conocer los <strong>Objetivos de Desarrollo Sostenible (ODS)</strong>. Estos son 17 grandes desafíos globales que los países del mundo acordaron resolver para tener un futuro mejor para todos."
+                    <br><br>
+                    "Píensenlos como <strong>'pedidos de diseño'</strong> urgentes para nosotros, los innovadores. Cada icono representa un gran reto: acabar con la pobreza, proteger el planeta, asegurar la salud, educación de calidad, agua limpia..."
+                    <i>(Mostrar brevemente los iconos en la Diapositiva 5, quizás señalando algunos ejemplos diversos).</i>
+                </td>
+            </tr>
+            <tr>
+                 <td><strong>PASO 2 (3 minutos):</strong> Elección del ODS por equipo.</td>
+                <td class="dialogue">
+                    "Ahora, en sus 'Estudios 3D', van a elegir <strong>UN ODS</strong> que les motive, que les interese especialmente para diseñar una solución 3D."
+                    <br><br>
+                    "Conversen en equipo: ¿Qué ODS les llama más la atención? ¿Qué problema relacionado con ese ODS ven a su alrededor (en la escuela, en casa, en su comunidad)? ¿Cómo creen que el diseño 3D podría ayudar a abordar ese problema, aunque sea de forma pequeña?"
+                     <br><br>
+                    "Tienen 3-4 minutos para discutir y elegir su ODS-misión. ¡Sean específicos sobre el problema que les gustaría abordar!"
+                     <i>(Dar tiempo para la discusión en equipo. Circular para escuchar y guiar si es necesario).</i>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>PASO 3 (1 minuto):</strong> Anuncio de ODS por equipo.</td>
+                <td class="dialogue">
+                    "¡Tiempo! Cada 'Estudio 3D', por favor anuncie en voz alta el ODS que han elegido como su desafío de diseño para este taller."
+                    <i>(Asegurarse de que cada equipo anuncie su ODS. Anotarlos si es necesario para referencia futura).</i>
+                    "¡Excelente! Ya tienen su misión. Ahora veremos cómo la impresión 3D ya está ayudando a enfrentar estos desafíos."
+                    <br><br>
+                    <i>(Entregable Parcial: ODS elegido por cada equipo).</i>
+                 </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- Actividad 6 -->
+<div id="activity-6" class="activity">
+    <div class="banner" onclick="toggleContent('shots_inspiracion')">
+        <div class="title">💡 Actividad 6: Shots de Inspiración: Diseño 3D en Acción ⏰ Tiempo: 5 minutos</div>
+        <div class="subtitle">Mostrar ejemplos rápidos de cómo la impresión 3D ya contribuye a los ODS.</div>
+    </div>
+    <div id="shots_inspiracion" class="content">
+        <table>
+            <tr>
+                 <td><strong>PASO 1 (0.5 minutos):</strong> Introducir los "Shots". Proyectar Diapositiva 6 (Título).</td>
+                <td class="dialogue">
+                    "¡Prepárense para unos 'Shots de Inspiración'! Vamos a ver ejemplos súper rápidos de cómo la impresión 3D ya está siendo utilizada para abordar algunos de los ODS que eligieron. ¡Inspírense!"
+                </td>
+            </tr>
+            <tr>
+                <td><strong>PASO 2 (3.5 minutos):</strong> Mostrar carrusel rápido de ejemplos. Proyectar Diapositivas 6.1 a 6.4.</td>
+                <td class="dialogue">
+                     <i>(Pasar rápidamente cada diapositiva del carrusel (aprox. 30-45 segundos por diapositiva), leyendo solo el título y el hashtag principal en voz alta y con energía).</i>
+                     <br><br>
+                     "<strong>(Diapositiva 6.1) Prótesis 3D e-NABLE:</strong> ¡Prótesis impresas en 3D a MUCHO menor costo! La impresión 3D democratiza la salud y ofrece soluciones personalizadas. ¡Tecnología para la inclusión y la esperanza! #ODS3 #Salud3D #Prótesis3D"
+                     <br><br>
+                     "<strong>(Diapositiva 6.2) Arrecifes Artificiales 3D:</strong> ¡Arrecifes impresos en 3D para reforestar los océanos y recuperar la vida marina! La impresión 3D crea hogares para peces y corales. ¡Tecnología para la vida oceánica! #ODS14 #VidaMarina3D #Arrecifes3D"
+                     <br><br>
+                     "<strong>(Diapositiva 6.3) Kit Robótica Octabio 3D:</strong> ¡Kits de robótica impresos en 3D! La impresión 3D reduce costos y democratiza la educación tecnológica. ¡Más estudiantes creando y aprendiendo! #ODS4 #Educación3D #Robótica3D"
+                     <br><br>
+                      "<strong>(Diapositiva 6.4) Casas Impresas 3D (Vulcan II):</strong> ¡Casas impresas en solo 24 horas! La impresión 3D permite construir viviendas ¡MUCHO más rápido! para familias necesitadas. ¡Tecnología para la acción inmediata! #ODS11 #Vivienda3D #Velocidad3D"
+                </td>
+            </tr>
+             <tr>
+                 <td><strong>PASO 3 (1 minuto):</strong> Conclusión de la inspiración.</td>
+                <td class="dialogue">
+                    "¿Vieron? ¡La impresión 3D tiene un poder increíble para hacer el bien y abordar desafíos reales! Estos son solo algunos ejemplos. Ahora, es su turno de pensar cómo SU diseño 3D puede contribuir a su ODS."
+                 </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- Actividad 7 -->
+<div id="activity-7" class="activity">
+    <div class="banner" onclick="toggleContent('combinaboard_inicial')">
+        <div class="title">🧩 Actividad 7: Táctica 1: Combinaboard (Parte 1) - Creación Inicial ⏰ Tiempo: 8 minutos</div>
+        <div class="subtitle">Iniciar la creación de un tablero visual de inspiración (mood board) digital por equipo.</div>
+    </div>
+    <div id="combinaboard_inicial" class="content">
+        <table>
+            <tr>
+                <td><strong>PASO 1 (1 minuto):</strong> Introducir Combinaboard. Proyectar Diapositiva 7 (Título y Explicación).</td>
+                <td class="dialogue">
+                    "¡Ok, diseñadores, activamos nuestra primera táctica de la receta: <strong>Combinaboard</strong>! Piensen en esto como nuestro 'muro de ideas' o 'collage' digital donde vamos a reunir toda nuestra inspiración para diseñar la solución 3D para el ODS que eligieron."
+                </td>
+            </tr>
+            <tr>
+                <td><strong>PASO 2 (2 minutos):</strong> Instrucciones para Miro. Proyectar Diapositiva 7 (Instrucción y Ejemplos).</td>
+                 <td class="dialogue">
+                    "Vamos a usar nuestro tablero digital en Miro (o la herramienta que tengamos preparada). Cada 'Estudio 3D' tiene su propia sección."
+                    <br><br>
+                     "En sus tableros Miro, busquen y añadan estos 3 tipos de elementos:"
+                    <ul>
+                        <li><strong>Imágenes:</strong> ¡Inspiración visual! Busquen imágenes relacionadas con su <strong>ODS</strong>, con el <strong>problema específico</strong> que quieren resolver, y también imágenes de <strong>diseños 3D que les gusten</strong> (formas, texturas, colores...).</li>
+                        <li><strong>Palabras Clave:</strong> Ideas, conceptos, emociones, materiales... Escriban palabras sueltas que se les ocurran (Ej: <i>Sostenible, Rápido, Ayuda, Proteger, Fácil, Tinkercad, Reciclado, Modular...</i>).</li>
+                        <li><strong>Preguntas Iniciales:</strong> ¿Qué preguntas les surgen ahora mismo? Escríbanlas. (Ej: <i>¿Cómo podría un objeto 3D resolver [su problema]? ¿Qué forma debería tener? ¿Para quién es exactamente? ¿Qué materiales usar?</i>).</li>
+                    </ul>
+                     "¡Exploren en internet si quieren! Busquen inspiración visual y conceptual."
+                 </td>
+            </tr>
+            <tr>
+                <td><strong>PASO 3 (4 minutos):</strong> Tiempo de exploración y creación en Miro.</td>
+                 <td class="dialogue">
+                    "¡Tienen 8 minutos para empezar a llenar su Combinaboard! ¡Sean libres, exploren! Añadan imágenes, palabras, preguntas. No se preocupen por el orden ni por tener la 'idea perfecta' todavía. El objetivo ahora es <strong>explorar y recopilar muchos estímulos</strong> diversos relacionados con su desafío."
+                    <br><br>
+                    <i>(Gestionar el tiempo. Circular por los equipos, animarles a buscar variedad de elementos visuales y textuales. Asegurarse de que están usando Miro y añadiendo contenido activamente. Recordarles que no hay orden específico en esta fase).</i>
+                </td>
+            </tr>
+             <tr>
+                <td><strong>PASO 4 (1 minuto):</strong> Cierre de la actividad.</td>
+                <td class="dialogue">
+                    "¡Tiempo! ¡Excelente inicio con sus Combinaboards! Ya tienen un montón de inspiración visual y textual para empezar a darle forma a sus ideas."
+                     <br><br>
+                    <i>(Entregable Clave: Combinaboard inicial por equipo en Miro con imágenes, palabras, preguntas).</i>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- Actividad 8 -->
+<div id="activity-8" class="activity">
+    <div class="banner" onclick="toggleContent('cierre_sesion1')">
+        <div class="title">🏁 Actividad 8: Cierre y Preparación para la Próxima Sesión ⏰ Tiempo: 2 minutos</div>
+        <div class="subtitle">Resumir la sesión y anticipar la siguiente fase del proceso de diseño.</div>
+    </div>
+    <div id="cierre_sesion1" class="content">
+        <table>
+            <tr>
+                <td><strong>PASO 1 (1.5 minutos):</strong> Resumen y Próxima Sesión. Proyectar Diapositiva 8.</td>
+                 <td class="dialogue">
+                     "¡Excelente inicio, diseñadores! Hoy han dado el primer gran paso: eligieron su misión ODS y han empezado a llenar sus Combinaboards de inspiración. ¡La creatividad está activada!"
+                     <br><br>
+                    "En la próxima sesión, entraremos a la Táctica 2: <strong>'Fence the Playground'</strong>. Vamos a poner algunas 'reglas de oro' a nuestra creatividad para enfocar nuestros diseños 3D. Y después... ¡prepárense para la Táctica 3: la <strong>'Carrera de Ideas 6-3-5'</strong>, donde generaremos muchísimas opciones de diseño!"
+                </td>
+            </tr>
+            <tr>
+                <td><strong>PASO 2 (0.5 minutos):</strong> Despedida.</td>
+                <td class="dialogue">
+                    "Revisen sus Combinaboards antes de la próxima sesión, piensen un poco más en su ODS y el problema que quieren resolver... ¡Nos vemos en la Sesión 2 para la explosión creativa! ¡Hasta la próxima, innovadores!"
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- ------------------------------------------------- Fin Espacio para Actividades --------------------------------------------------------- -->
+
+</div>
+
+</body>
+</html>
